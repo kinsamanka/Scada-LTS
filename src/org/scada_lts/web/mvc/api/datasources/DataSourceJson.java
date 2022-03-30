@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.serotonin.mango.vo.dataSource.DataSourceVO;
 import org.scada_lts.web.mvc.api.datasources.modbusip.ModbusIpDataSourceJson;
 import org.scada_lts.web.mvc.api.datasources.snmp.SnmpDataSourceJson;
+import org.scada_lts.web.mvc.api.datasources.tango.TangoDataSourceJson;
 import org.scada_lts.web.mvc.api.datasources.virtual.VirtualDataSourceJson;
 
 @JsonTypeInfo(
@@ -14,7 +15,8 @@ import org.scada_lts.web.mvc.api.datasources.virtual.VirtualDataSourceJson;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = VirtualDataSourceJson.class, name = "1"),
         @JsonSubTypes.Type(value = ModbusIpDataSourceJson.class, name = "3"),
-        @JsonSubTypes.Type(value = SnmpDataSourceJson.class, name = "5")
+        @JsonSubTypes.Type(value = SnmpDataSourceJson.class, name = "5"),
+        @JsonSubTypes.Type(value = TangoDataSourceJson.class, name = "42")
 })
 public class DataSourceJson {
 

@@ -209,6 +209,7 @@
 	"datasource.type.virtualdatasource": "Virtual Data Source",
 	"datasource.type.snmpdatasource": "SNMP Data Source",
 	"datasource.type.modbusdatasource": "Modbus IP Data Source",
+	"datasource.type.tangodatasource": "TANGO CS Data Source",
 	"datasource.type.unrecognized": "Data Source not supported",
 	"datasource.modbus.range.1": "Coil Status",
 	"datasource.modbus.range.2": "Input Status",

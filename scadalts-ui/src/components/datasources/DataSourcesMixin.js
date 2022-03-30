@@ -16,6 +16,12 @@ import ModBusDataSourcePointEditor from './ModBusIpDataSource/point';
 import ModBusDataSourcePointList from './ModBusIpDataSource/list';
 import ModBusDataPoint from './ModBusIpDataSource/ModBusDataPoint';
 
+import TangoDataSource from './TangoDataSource';
+import TangoDataSourceEditor from './TangoDataSource/config';
+import TangoDataSourcePointEditor from './TangoDataSource/point';
+import TangoDataSourcePointList from './TangoDataSource/list';
+import TangoDataPoint from './TangoDataSource/TangoDataPoint';
+
 /**
  * Data Sources Mixin
  * 
@@ -44,6 +50,11 @@ export const dataSourcesMixin = {
         'modbusdatasourceeditor': ModBusDataSourceEditor,
         'modbusdatasourcepointeditor': ModBusDataSourcePointEditor,
         'modbusdatasourcepointlist': ModBusDataSourcePointList,
+
+        'tangodatasource': TangoDataSource,
+        'tangodatasourceeditor': TangoDataSourceEditor,
+        'tangodatasourcepointeditor': TangoDataSourcePointEditor,
+        'tangodatasourcepointlist': TangoDataSourcePointList,
     },
 
     methods: {
@@ -56,6 +67,8 @@ export const dataSourcesMixin = {
                     return new SnmpDataPoint(itemId);
                 case 'modbusdatasource':
                     return new ModBusDataPoint(itemId);
+                case 'tangodatasource':
+                    return new TangoDataPoint(itemId);
                 default:
                     return null;
             }

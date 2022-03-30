@@ -85,5 +85,17 @@ export const datasourceDetailsMocks = [
         encapsulated: false,
         createSockerMonitorPort: false,
         
+    },
+    {
+        id: 4,
+        xid: 'MOCK_DS_01432212',
+        enabled: true,
+        name: 'DataSourceMock TangoCS - 01',
+        type: 42,
+        description: 'Mocked Tango CS',
+
+        deviceID; 'sys/tg_test/1',
+        hostName: 'localhost',
+        port: 10000,
     }
-]
+ ]
