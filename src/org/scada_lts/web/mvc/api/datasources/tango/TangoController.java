@@ -9,8 +9,6 @@ import fr.esrf.TangoApi.DeviceProxy;
 import fr.esrf.TangoDs.TangoConst;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 /**
@@ -57,17 +57,18 @@ public class TangoController {
                     return new ResponseEntity<>(response, HttpStatus.OK);
                 }
 
-                JSONArray attr = new JSONArray();
+                Collection<Map<String,String>> attr = new HashSet<>();
                 for (AttributeInfo ai : ac) {
-                    JSONObject ar = new JSONObject();
-                    ar.put("name", ai.name);
-                    ar.put("type", TangoConst.Tango_CmdArgTypeName[ai.data_type]);
-                    attr.put(ar);
+                    Map<String, String> map = new HashMap<>();
+                    map.put("name", ai.name);
+                    map.put("access", ai.writable.toString());
+                    map.put("type", TangoConst.Tango_CmdArgTypeName[ai.data_type]);
+                    attr.add(map);
                 }
 
                 response.put("status", "success");
                 response.put("response", dp.get_info().toString());
-                response.put("attributes", attr.toString());
+                response.put("attributes", attr);
 
                 return new ResponseEntity<>(response, HttpStatus.OK);
             } else {
