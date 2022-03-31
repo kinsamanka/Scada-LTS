@@ -3,21 +3,33 @@
         <v-card elevation="1">
             <v-card-title> TANGO Device Info </v-card-title>
             <v-card-text>
-                <div class="message-box-container">
-                    <div class="message-box" v-if="loading">Loading...</div>
-                    <div v-if="!!status" class="message-box">
-                        <span v-if="status.type === 'error'">
-                            <v-icon> mdi-alert-circle </v-icon>
-                            {{ status.message }}
-                        </span>
-                        <span v-if="status.type === 'success'">
-                            <pre>{{status.message}}</pre>
-                        </span>
-                    </div>
-                </div>
-
-                <v-btn elevation="1" @click="tangoTest" class="full-width" v-if="update"> Update </v-btn>
-                <v-btn elevation="1" @click="tangoTest" class="full-width" v-else> Connect </v-btn>
+                <v-row>
+                    <v-col class="col1">
+                        <div class="message-box-container">
+                            <div v-if="!!status" class="message-box">
+                                <span v-if="status.type === 'error'">
+                                    <v-icon> mdi-alert-circle </v-icon>
+                                    {{ status.message }}
+                                </span>
+                                <span v-if="status.type === 'success'">
+                                    <pre>{{status.message}}</pre>
+                                </span>
+                            </div>
+                        </div>
+                        <v-btn elevation="1" @click="tangoTest" class="full-width" v-if="update"> Update </v-btn>
+                        <v-btn elevation="1" @click="tangoTest" class="full-width" v-else> Connect </v-btn>
+                    </v-col>
+                    <v-col class="col2" v-if="update">
+                        <v-data-table
+                           dense
+                           :headers="headers"
+                           :items="attributes"
+                           :items-per-page="4"
+                           item-key="name"
+                           class="elevation-1">
+                        </v-data-table>
+                    </v-col>
+                </v-row>
             </v-card-text>
         </v-card>
     </div>
@@ -32,6 +44,11 @@ export default {
                 type: '',
                 message: '',
             },
+            attributes: [],
+              headers: [
+                { text: 'Attribute Name', align: 'start', value: 'name' },
+                { text: 'Type', value: 'type' },
+              ],
         };
     },
 
@@ -56,6 +73,7 @@ export default {
                             message: this.$t(r.response),
                         };
                     } else {
+                        this.attributes = JSON.parse(r.attributes);
                         this.update = true;
                             this.status = {
                             type: 'success',
@@ -92,9 +110,15 @@ export default {
     font-style: italic;
 }
 .tango-widget {
-    max-width: 500px;
+    max-width: 1000px;
+}
+.col1 {
+    min-width: 400px;
+}
+.col2 {
+    max-width: 400px;
 }
 .full-width {
     width: 100%;
 }
-</style>
+/style>
