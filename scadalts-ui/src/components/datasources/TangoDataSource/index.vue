@@ -10,16 +10,25 @@
 				:polling="false"
 			/>
 		</template>
+		<v-row>
+			<v-col>
+				<tangoTest :datasource="ds"> </tangoTest>
+			</v-col>
+		</v-row>
 	</DataSourceLoader>
 </template>
 <script>
 import DataSourceBase from '../DataSourceBase.vue';
 import config from './config.vue';
+import tangoTest from './components/tangoTest.vue';
 
 export default {
 	extends: DataSourceBase,
 
-	components: { config },
+	components: {
+	    config,
+	    tangoTest,
+	},
 
 	data() {
 		return {
