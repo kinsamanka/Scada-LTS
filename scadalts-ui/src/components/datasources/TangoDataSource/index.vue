@@ -10,16 +10,27 @@
 				:polling="false"
 			/>
 		</template>
+		<v-row>
+			<v-col>
+				<tangoTest :datasource="ds"> </PointLocatorTest>
+			</v-col>
+
+			<!-- TODO: Implement ReadData Component and NodeScan -->
+		</v-row>
 	</DataSourceLoader>
 </template>
 <script>
 import DataSourceBase from '../DataSourceBase.vue';
 import config from './config.vue';
+import tangoTest from './components/tangoTest.vue';
 
 export default {
 	extends: DataSourceBase,
 
-	components: { config },
+	components: {
+	    config,
+	    tangoTest,
+	},
 
 	data() {
 		return {

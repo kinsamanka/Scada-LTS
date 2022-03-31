@@ -412,8 +412,15 @@ const ds = {
 				url: `/datasources/snmp/testSnmp`,
 				data: Object.assign({}, datasource, {oid})
 			});
+        },
 
-
+		//TANGO DataSource methods
+		tangoDeviceInfo({dispatch}, datasource) {
+			console.log(datasource);
+			return dispatch('requestPost', {
+				url: `/datasources/tango/deviceinfo`,
+				data: datasource
+			});
 		}
 	},
 
