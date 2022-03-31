@@ -40,7 +40,7 @@ export default {
 			this.loading = true;
 			this.status = null;
 			this.$store
-				.dispatch('tangoDeviceInfo', datasource)
+				.dispatch('tangoDeviceInfo', this.datasource)
 				.then((r) => {
                     if(r.response.includes('tango.tester.noResponse')) {
                         this.status = {

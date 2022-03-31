@@ -12,7 +12,7 @@
 		</template>
 		<v-row>
 			<v-col>
-				<tangoTest :datasource="ds"> </PointLocatorTest>
+				<tangoTest :datasource="ds"> </tangoTest>
 			</v-col>
 
 			<!-- TODO: Implement ReadData Component and NodeScan -->
