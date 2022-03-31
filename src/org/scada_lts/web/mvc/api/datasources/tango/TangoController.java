@@ -39,7 +39,7 @@ public class TangoController {
                 TangoDataSourceJson ds = mapper.convertValue(data.get("datasource"), TangoDataSourceJson.class);
                 String devName = String.format("tango://%s:%d/%s", ds.getHostName(), ds.getPort(), ds.getDeviceID());
                 Map<String, Object> response = new HashMap<>();
-                DeviceProxy dp = null;
+                DeviceProxy dp;
 
                 try {
                     dp = new DeviceProxy(devName);
@@ -47,18 +47,18 @@ public class TangoController {
                 } catch (Exception e) {
                     LOG.error(String.format("Failed to connect to device: %s", devName));
                     response.put("status", "failed");
-                    response.put("description", "Failed to establish a connection");
+                    response.put("response", "Failed to establish a connection");
                     return new ResponseEntity<>(response, HttpStatus.OK);
                 }
 
                 response.put("status", "success");
-                response.put("value", dp.get_info().toString());
-                response.put("response", "Hello World!");
+                response.put("response", dp.get_info().toString());
                 return new ResponseEntity<>(response, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             }
         } catch (Exception e) {
+            LOG.error(String.format("Failed: %s", e));
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

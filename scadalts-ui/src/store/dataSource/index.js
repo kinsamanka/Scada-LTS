@@ -415,11 +415,10 @@ const ds = {
         },
 
 		//TANGO DataSource methods
-		tangoDeviceInfo({dispatch}, datasource) {
-			console.log(datasource);
+		tangoDeviceInfo({dispatch}, data) {
 			return dispatch('requestPost', {
 				url: `/datasources/tango/deviceinfo`,
-				data: datasource
+				data: data
 			});
 		}
 	},

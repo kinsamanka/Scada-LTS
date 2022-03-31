@@ -6,8 +6,13 @@
 				<div class="message-box-container">
 					<div class="message-box" v-if="loading">Loading...</div>
 					<div v-if="!!status" class="message-box">
-						<v-icon v-if="status.type === 'error'"> mdi-alert-circle </v-icon>
-						{{ status.message }}
+						<span v-if="status.type === 'error'">
+							<v-icon> mdi-alert-circle </v-icon>
+							{{ status.message }}
+						</span>
+						<span v-if="status.type === 'success'">
+							<pre>{{status.message}}</pre>
+						</span>
 					</div>
 				</div>
 
@@ -40,9 +45,9 @@ export default {
 			this.loading = true;
 			this.status = null;
 			this.$store
-				.dispatch('tangoDeviceInfo', this.datasource)
+				.dispatch('tangoDeviceInfo', { datasource: this.datasource })
 				.then((r) => {
-                    if(r.response.includes('tango.tester.noResponse')) {
+                    if(r.response.toLowerCase().includes('fail')) {
                         this.status = {
 						    type: 'error',
 						    message: this.$t(r.response),
